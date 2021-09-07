@@ -11,10 +11,6 @@ ul {
   align-items: center;
 }
 
-img {
-  width: 100%;
-}
-
 #app {
   display: flex;
   justify-content: center;
@@ -22,13 +18,18 @@ img {
   text-align: center;
   height: 100vh;
 }
+.user-title {
+  font-size: 2rem;
+}
 .bg-question {
   width: 100%;
   height: 100px;
   background-image: url("../images/question.png");
+  background-color: #fff;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 2rem;
 }
 .spin {
   width: 100%;
@@ -36,14 +37,14 @@ img {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  animation: handspin 0.7s infinite;
+  animation: handspin 0.5s infinite;
 }
 .spin > .icon {
   display: none;
 }
 .icon {
-  width: 100%;
-  /* height: 100px; */
+  /* width: 100%; */
+  height: 100px;
 }
 .count-number {
   font-size: 3rem;
@@ -61,7 +62,7 @@ img {
   justify-content: center;
   align-items: center;
   height: 50px;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: bold;
 }
 
@@ -81,10 +82,10 @@ img {
 .popup-result.show {
   z-index: 1010;
   opacity: 1;
-  width: 50%;
+  width: 100%;
   height: auto;
   transform-origin: center center;
-  animation: zoomin 0.5s ease-in;
+  animation: zoomin 0.3s ease-in;
 }
 .popup-result h2 {
   margin: 1rem 0;
@@ -94,7 +95,8 @@ img {
   text-shadow: 2px 1px 3px #000;
 }
 .popup-result img {
-  width: 100%;
+  width: 20rem;
+  height: 20rem;
   border: 5px solid #666;
   border-radius: 50%;
 }
@@ -119,7 +121,7 @@ img {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 @keyframes zoomin {

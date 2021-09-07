@@ -70,7 +70,7 @@ new Vue({
             clearInterval(countDown);
             this.progress = false;
           }
-        }, 1000);
+        }, 500);
       }
     },
     restart() {
