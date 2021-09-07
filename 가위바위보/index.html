@@ -15,7 +15,8 @@
   </head>
   <body>
     <div id="app">
-      <div class="container">
+      <div class="container pt-5 pb-4">
+        <!-- 대결판 -->
         <div class="row justify-content-center align-items-center">
           <div class="col-5 text-center">
             <div :class="{ 'bg-question': myChoice === null }">
@@ -124,16 +125,47 @@
           <div class="col-12">
             <div class="d-grid">
               <button
-                type="button"
+                v-if="isActive === true"
                 @click="startGame"
                 class="btn btn-primary btn-lg btn-block"
+                type="button"
               >
                 시작
+              </button>
+              <button
+                v-else
+                class="btn btn-primary btn-lg btn-block"
+                type="button"
+                disabled
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                두구두구두구두구두...
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <section class="container my-3">
+        <transition-group
+          name="list"
+          tag="ul"
+          class="align-items-stretch flex-column-reverse"
+        >
+          <li v-for="(item, index) in logs" :key="index" class="list-item">
+            <div
+              :class="{ 'alert-success': item.winner === 'me', 'alert-danger': item.winner === 'com', 'alert-warning': item.winner === 'no one'}"
+              class="alert p-1"
+            >
+              {{ item.message }}
+            </div>
+          </li>
+        </transition-group>
+      </section>
 
       <!-- result popup -->
       <div class="popup-result" :class="{ show: this.result !== null }">

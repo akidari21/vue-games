@@ -7,8 +7,10 @@ new Vue({
     winner: "",
     lifeMe: 3,
     lifeCom: 3,
+    isActive: true,
     progress: false,
     result: null,
+    logs: [],
   },
   watch: {
     count: function (newVal) {
@@ -53,6 +55,15 @@ new Vue({
             }, 1000);
           }
         }
+        this.isActive = true;
+
+        // 승패 기록
+        let log = {
+          message: `You: ${this.myChoice}, Computer: ${this.comChoice}`,
+          winner: this.winner,
+        };
+        this.logs.push(log);
+        console.log(this.logs);
       }
     },
   },
@@ -61,6 +72,7 @@ new Vue({
       if (this.myChoice === null) {
         alert("선택하세요!");
       } else {
+        this.isActive = false;
         this.count = 3;
         this.winner = "";
         this.progress = true;

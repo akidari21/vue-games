@@ -1,5 +1,7 @@
+html,
 body {
   height: 100%;
+  position: relative;
 }
 
 ul {
@@ -12,11 +14,13 @@ ul {
 }
 
 #app {
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
+  height: 100%;
   text-align: center;
-  height: 100vh;
 }
 .user-title {
   font-size: 2rem;
@@ -71,16 +75,18 @@ ul {
   width: 30%;
   white-space: nowrap;
 }
-/* 결과 이미지 */
+/* 결과 팝업 */
 .popup-result {
   position: absolute;
   z-index: -1;
+  overflow: hidden;
   width: 0;
   height: 0;
   opacity: 0;
 }
 .popup-result.show {
   z-index: 1010;
+  overflow: visible;
   opacity: 1;
   width: 100%;
   height: auto;
@@ -146,4 +152,13 @@ ul {
   100% {
     background-image: url("../images/sissor.png");
   }
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(-30px);
 }
