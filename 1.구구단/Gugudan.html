@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구구단</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h3>곱하기</h3>
+      <p>{{ first }} 곱하기 {{ second }}은(는)?</p>
+      <form action="">
+        <input type="number" ref="answer" v-model="value" />
+        <button type="button" @click="onAnswer">입력</button>
+      </form>
+      <p>
+        <strong>{{ result }}</strong>
+      </p>
+    </div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#root",
+      data: {
+        first: Math.ceil(Math.random() * 9),
+        second: Math.ceil(Math.random() * 9),
+        value: "",
+        result: "",
+      },
+      methods: {
+        onAnswer() {
+          if (this.value !== "") {
+            let correctVal = this.first * this.second;
+            if (this.value == correctVal) {
+              this.result = "정답";
+            } else {
+              this.result = "땡";
+            }
+            this.first = Math.ceil(Math.random() * 9);
+            this.second = Math.ceil(Math.random() * 9);
+            this.clearInput();
+          } else {
+            this.result = "답을 입력하세요";
+            this.clearInput();
+          }
+        },
+        clearInput() {
+          this.$refs.answer.focus();
+          this.value = "";
+        },
+      },
+    });
+  </script>
+</html>

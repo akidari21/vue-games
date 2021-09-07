@@ -1,0 +1,147 @@
+body {
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+.bg-question {
+  width: 100%;
+  height: 100px;
+  background-image: url("../images/question.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.spin {
+  width: 100%;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: handspin 0.7s infinite;
+}
+.spin > .icon {
+  display: none;
+}
+.icon {
+  width: 100%;
+  /* height: 100px; */
+}
+.count-number {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.icon-win {
+  width: 50px;
+}
+.icon-win.off {
+  filter: unset;
+  filter: grayscale(100%);
+}
+.talkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* 가위바위보 버튼 */
+.btn-outline-success {
+  width: 30%;
+  white-space: nowrap;
+}
+/* 결과 이미지 */
+.popup-result {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.popup-result.show {
+  z-index: 1010;
+  opacity: 1;
+  width: 50%;
+  height: auto;
+  transform-origin: center center;
+  animation: zoomin 0.5s ease-in;
+}
+.popup-result h2 {
+  margin: 1rem 0;
+  font-weight: bold;
+  font-size: 3rem;
+  color: yellow;
+  text-shadow: 2px 1px 3px #000;
+}
+.popup-result img {
+  width: 100%;
+  border: 5px solid #666;
+  border-radius: 50%;
+}
+.popup-result .btn-restart {
+  padding: 1rem 2rem;
+  background: #000;
+  border-style: none;
+  border-radius: 1rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.block-ui {
+  content: "";
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes zoomin {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes handspin {
+  0% {
+    background-image: url("../images/sissor.png");
+  }
+  33% {
+    background-image: url("../images/rock.png");
+  }
+  66% {
+    background-image: url("../images/paper.png");
+  }
+  100% {
+    background-image: url("../images/sissor.png");
+  }
+}

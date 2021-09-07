@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>끝말잇기 (컴포넌트)</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- <div>{{ word }}</div>
+      <form action="" v-on:submit="onSubmitForm">
+        <input type="text" ref="answer" v-model="value" />
+        <button type="submit">입력!</button>
+      </form>
+      <div>{{ result }}</div> -->
+      <word-relay start-word="제로초"></word-relay>
+      <word-relay start-word="초밥"></word-relay>
+      <word-relay start-word="바보"></word-relay>
+    </div>
+
+    <script>
+      Vue.component("word-relay", {
+        // 전역 컴포넌트
+        template: `
+        <div>
+          <div>{{ word }}</div>
+          <form action="" v-on:submit="onSubmitForm">
+            <input type="text" ref="answer" v-model="value" />
+            <button type="submit">입력!</button>
+          </form>
+          <div>{{ result }}</div>
+        </div>
+        `,
+        props: ["startWord"],
+        data() {
+          return {
+            word: this.startWord,
+            result: "",
+            value: "",
+          };
+        },
+        methods: {
+          onSubmitForm(e) {
+            e.preventDefault();
+            if (this.word[this.word.length - 1] === this.value[0]) {
+              this.result = "딩동";
+              this.word = this.value;
+              this.value = "";
+              this.clearFocus();
+            } else {
+              this.result = "땡~!";
+              this.value = "";
+              this.clearFocus();
+            }
+          },
+          clearFocus() {
+            this.$refs.answer.focus();
+          },
+        },
+      });
+    </script>
+
+    <script>
+      const app = new Vue({
+        el: "#root",
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보 게임</title>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-5 text-center">
+            <div :class="{ 'bg-question': myChoice === null }">
+              <img
+                v-if="myChoice !== null"
+                :src="'images/'+ myChoice + '.png'"
+                class="icon"
+                alt=""
+              />
+            </div>
+            <h2 class="my-4">나</h2>
+          </div>
+          <div class="col-2 text-center">
+            <b v-if="count !== null" class="count-number">{{ count }}</b>
+            <b v-else class="count-number">vs</b>
+          </div>
+          <div class="col-5 text-center">
+            <div
+              :class="[{'bg-question': comChoice === null}, {'spin': progress === true}]"
+            >
+              <img
+                v-if="comChoice !== null"
+                :src="'images/' + comChoice +'.png'"
+                class="icon"
+                alt=""
+              />
+            </div>
+            <h2 class="my-4">컴퓨터</h2>
+          </div>
+        </div>
+        <!-- 생명 -->
+        <div class="row mt-4">
+          <div class="col-5 text-center">
+            <ul>
+              <li v-for="item in lifeMe">
+                <img src="images/win.png" class="icon-win" alt="" />
+              </li>
+              <li v-for="item in 3 - lifeMe">
+                <img src="images/win.png" class="icon-win off" alt="" />
+              </li>
+            </ul>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5 text-center">
+            <ul>
+              <li v-for="item in lifeCom">
+                <img src="images/win.png" class="icon-win" alt="" />
+              </li>
+              <li v-for="item in 3 - lifeCom">
+                <img src="images/win.png" class="icon-win off" alt="" />
+              </li>
+            </ul>
+            <div class="row my-3">
+              <div class="talkbox">
+                <div v-if="this.progress" class="d-flex align-items-center">
+                  <strong>뚝배기 굴리는 중...</strong>
+                  <div
+                    class="spinner-border"
+                    role="status"
+                    aria-hidden="true"
+                  ></div>
+                </div>
+                <div v-if="this.winner === 'com'">이겼지롱~</div>
+                <div v-if="this.winner === 'me'">ㅠㅠ</div>
+                <div v-if="this.winner === 'no one'">어쭈구리?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 선택 -->
+        <div class="row mt-3 text-center">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <input
+              type="radio"
+              class="btn-check"
+              name="me"
+              id="me1"
+              autocomplete="off"
+              v-model="myChoice"
+              value="sissor"
+            />
+            <label class="btn btn-outline-success" for="me1">가위</label>
+            <input
+              type="radio"
+              class="btn-check"
+              name="me"
+              id="me2"
+              autocomplete="off"
+              v-model="myChoice"
+              value="rock"
+            />
+            <label class="btn btn-outline-success" for="me2">바위</label>
+            <input
+              type="radio"
+              class="btn-check"
+              name="me"
+              id="me3"
+              autocomplete="off"
+              v-model="myChoice"
+              value="paper"
+            />
+            <label class="btn btn-outline-success" for="me3">보</label>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="d-grid">
+              <button
+                type="button"
+                @click="startGame"
+                class="btn btn-primary btn-lg btn-block"
+              >
+                시작
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- result popup -->
+      <div class="popup-result" :class="{ show: this.result !== null }">
+        <div v-if="lifeMe === 0">
+          <h2>You Lose!</h2>
+          <img src="images/lose.jpg" class="img-thumbnail" alt="" />
+        </div>
+        <div v-else>
+          <h2>You Win!</h2>
+          <img src="images/win.gif" class="img-thumbnail" alt="" />
+        </div>
+        <button class="mt-5 btn-restart" @click="restart">다시하기</button>
+      </div>
+      <div v-if="this.result !== null" class="block-ui"></div>
+    </div>
+    <!-- #app -->
+    <script src="app.js"></script>
+  </body>
+</html>
