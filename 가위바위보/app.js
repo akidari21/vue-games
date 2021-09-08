@@ -29,6 +29,14 @@ new Vue({
         return `images/${this.comChoice}.png`;
       }
     },
+    logWinner: function () {
+      // computed 에 부득이하게 파라메터를 받을 경우
+      return (item) => {
+        if (item === "com") return "컴퓨터 승!";
+        else if (item === "me") return "나의 승!";
+        else return "무승부";
+      };
+    },
   },
   watch: {
     count: function (newVal) {
@@ -56,11 +64,10 @@ new Vue({
           this.winner = null;
         }
 
-        // 차감
+        // 하트 차감
         if (this.winner === "me") {
           this.lifeCom--;
           if (this.lifeCom === 0) {
-            // alert("당신의 승리!");
             setTimeout(() => {
               this.result = "me";
             }, 1000);
@@ -68,7 +75,6 @@ new Vue({
         } else if (this.winner === "com") {
           this.lifeMe--;
           if (this.lifeMe === 0) {
-            // alert("컴퓨터의 승리!");
             setTimeout(() => {
               this.result = "com";
             }, 1000);
@@ -77,11 +83,20 @@ new Vue({
         this.isActive = true;
 
         // 승패 기록
-        // let myChoose = this.myChoice === 'sissor' ? '가위';
-        // myChoose = this.myChoice === 'rock' ? '바위';
-        // myChoose = this.myChoice === 'paper' ? '보';
+        let myChoose = this.hands.filter(
+          (hand) => hand.value === this.myChoice
+        );
+        let comChoose = this.hands.filter(
+          (hand) => hand.value === this.comChoice
+        );
+        // console.log(myChoose[0].name, comChoose[0].name);
+
         let log = {
-          message: `You: ${this.myChoice}, Computer: ${this.comChoice}`,
+          message: {
+            me: myChoose[0].name,
+            com: comChoose[0].name,
+          },
+          // `You: ${this.myChoice}, Computer: ${this.comChoice}`,
           winner: this.winner,
         };
         this.logs.push(log);

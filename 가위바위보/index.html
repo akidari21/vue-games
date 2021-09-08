@@ -131,9 +131,14 @@
           <li v-for="(item, index) in logs" :key="index" class="list-item">
             <div
               :class="{ 'alert-success': item.winner === 'me', 'alert-danger': item.winner === 'com', 'alert-warning': item.winner === 'no one'}"
-              class="alert p-1"
+              class="alert row mx-auto p-1 d-flex justify-content-between"
             >
-              {{ item.message }}
+              <span class="col-4">{{ item.message.me }}</span>
+              <span class="col-4 text-center"
+                >{{ logWinner(item.winner) }}</span
+              >
+              <span class="col-4">{{ item.message.com }}</span>
+              <!-- {{ item.message }} -->
             </div>
           </li>
         </transition-group>
