@@ -72,7 +72,7 @@ ul {
 
 /* 가위바위보 버튼 */
 .btn-outline-success {
-  width: 30%;
+  width: 100%;
   white-space: nowrap;
 }
 /* 결과 팝업 */

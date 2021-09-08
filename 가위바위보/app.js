@@ -11,12 +11,31 @@ new Vue({
     progress: false,
     result: null,
     logs: [],
+    hands: [
+      { name: "가위", value: "sissor" },
+      { name: "바위", value: "rock" },
+      { name: "보", value: "paper" },
+    ],
+  },
+  computed: {
+    // v-if 을 안 쓰ㅗ 여기서 처리
+    myChoiceImg: function () {
+      if (this.myChoice !== null) {
+        return `images/${this.myChoice}.png`;
+      }
+    },
+    comChoiceImg: function () {
+      if (this.comChoice !== null) {
+        return `images/${this.comChoice}.png`;
+      }
+    },
   },
   watch: {
     count: function (newVal) {
       if (newVal === 0) {
-        const hands = ["sissor", "rock", "paper"];
-        this.comChoice = hands[Math.floor(Math.random() * hands.length)];
+        const comHand =
+          this.hands[Math.floor(Math.random() * this.hands.length)];
+        this.comChoice = comHand.value;
 
         // 승패
         if (this.comChoice == this.myChoice) {
@@ -58,6 +77,9 @@ new Vue({
         this.isActive = true;
 
         // 승패 기록
+        // let myChoose = this.myChoice === 'sissor' ? '가위';
+        // myChoose = this.myChoice === 'rock' ? '바위';
+        // myChoose = this.myChoice === 'paper' ? '보';
         let log = {
           message: `You: ${this.myChoice}, Computer: ${this.comChoice}`,
           winner: this.winner,
@@ -94,6 +116,7 @@ new Vue({
       this.lifeCom = 3;
       this.progress = false;
       this.result = null;
+      this.logs = [];
     },
   },
 });

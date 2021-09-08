@@ -20,12 +20,7 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-5 text-center">
             <div :class="{ 'bg-question': myChoice === null }">
-              <img
-                v-if="myChoice !== null"
-                :src="'images/'+ myChoice + '.png'"
-                class="icon"
-                alt=""
-              />
+              <img :src="myChoiceImg" class="icon" alt="" />
             </div>
             <strong class="user-title my-4">나</strong>
           </div>
@@ -37,12 +32,7 @@
             <div
               :class="[{'bg-question': comChoice === null}, {'spin': progress === true}]"
             >
-              <img
-                v-if="comChoice !== null"
-                :src="'images/' + comChoice +'.png'"
-                class="icon"
-                alt=""
-              />
+              <img :src="comChoiceImg" class="icon" alt="" />
             </div>
             <strong class="user-title my-4">컴퓨터</strong>
           </div>
@@ -88,37 +78,19 @@
         </div>
         <!-- 선택 -->
         <div class="row mt-3 text-center">
-          <div class="col-12 d-flex justify-content-between align-items-center">
+          <div v-for="hand in hands" class="col-4 d-flex">
             <input
               type="radio"
               class="btn-check"
               name="me"
-              id="me1"
+              :id="hand.value"
               autocomplete="off"
               v-model="myChoice"
-              value="sissor"
+              :value="hand.value"
             />
-            <label class="btn btn-outline-success" for="me1">가위</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="me"
-              id="me2"
-              autocomplete="off"
-              v-model="myChoice"
-              value="rock"
-            />
-            <label class="btn btn-outline-success" for="me2">바위</label>
-            <input
-              type="radio"
-              class="btn-check"
-              name="me"
-              id="me3"
-              autocomplete="off"
-              v-model="myChoice"
-              value="paper"
-            />
-            <label class="btn btn-outline-success" for="me3">보</label>
+            <label class="btn btn-block btn-outline-success" :for="hand.value"
+              >{{ hand.name }}</label
+            >
           </div>
         </div>
         <div class="row mt-4">
@@ -150,7 +122,7 @@
         </div>
       </div>
 
-      <section class="container my-3">
+      <section class="container my-2">
         <transition-group
           name="list"
           tag="ul"
